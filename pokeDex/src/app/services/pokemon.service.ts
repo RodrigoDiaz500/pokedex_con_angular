@@ -15,5 +15,10 @@ export class PokemonService {
     return this.http.get<any>(`${this.baseUrl}/pokemon/${index}`);
   }
 
+  getLetterCounts() {
+    return this.http.get<any>(`${this.baseUrl}/letter-counts`);
+  }
+
 }
+
 

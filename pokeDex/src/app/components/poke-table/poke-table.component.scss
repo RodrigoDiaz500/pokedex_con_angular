@@ -7,25 +7,20 @@
   margin-bottom: 20px;
   text-align: center;
   display: flex;
-  flex-direction: column; /* Apilar los contenedores verticalmente */
+  flex-direction: column;
 }
 
 .content-wrapper {
   display: flex;
-  margin-top: 20px; /* Mover los contenedores hacia abajo */
+  margin-top: 20px;
 }
 
+//estilos de la tabla
 .table-container {
   width: 90%;
   margin: 0 20px;
   min-height: 100%;
   background-color: #f2f2f2;
-}
-
-.card-container {
-  width: 20%;
-  margin: 0 20px;
-  background-color: #fff;
 }
 
 .mat-header-cell {
@@ -46,6 +41,15 @@
   text-align: center;
 }
 
+
+//estilos de la card
+
+.card-container {
+  width: 20%;
+  margin: 0 20px;
+  background-color: #f2f2f2
+}
+
 .example-card {
   text-transform: capitalize;
   height: 100%;
@@ -60,6 +64,6 @@
 }
 
 .mat-mdc-card-header {
-  display: block !important; /* Cambia flex a block */
+  display: block !important;
   padding: 16px 16px 0;
 }

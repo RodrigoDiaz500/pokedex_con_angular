@@ -12,7 +12,8 @@ export class PokeTableComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'image', 'type'];
   dataSource = new MatTableDataSource<any>();
   pokemons: any[] = [];
-  selectedPokemon: any | undefined; // Inicializa selectedPokemon
+  selectedPokemon: any | undefined;
+  letterCounts: any[] = [];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
 
@@ -21,7 +22,6 @@ export class PokeTableComponent implements OnInit {
   ngOnInit(): void {
     this.getPokemons();
 
-    // Inicializa selectedPokemon con el primer Pokémon
     this.PokemonService.getPokemons(1).subscribe({
       next: (res) => {
         this.selectedPokemon = {
@@ -35,6 +35,16 @@ export class PokeTableComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al obtener el primer pokémon:', err);
+      }
+    });
+
+    // Obtén los datos de la tabla de recuento de letras
+    this.PokemonService.getLetterCounts().subscribe({
+      next: (res) => {
+        this.letterCounts = res;
+      },
+      error: (err) => {
+        console.error('Error al obtener el recuento de letras:', err);
       }
     });
   }

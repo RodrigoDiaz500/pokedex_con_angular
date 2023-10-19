@@ -37,16 +37,6 @@ export class PokeTableComponent implements OnInit {
         console.error('Error al obtener el primer pokémon:', err);
       }
     });
-
-    // Obtén los datos de la tabla de recuento de letras
-    this.PokemonService.getLetterCounts().subscribe({
-      next: (res) => {
-        this.letterCounts = res;
-      },
-      error: (err) => {
-        console.error('Error al obtener el recuento de letras:', err);
-      }
-    });
   }
 
   getPokemons() {
@@ -77,6 +67,37 @@ export class PokeTableComponent implements OnInit {
     }
   }
 
+  calculateLetterCounts() {
+    if (this.selectedPokemon) {
+      const letterCounts = new Map<string, number>();
+      const selectedLetter = this.selectedPokemon.name.charAt(0).toUpperCase();
+
+      this.pokemons.forEach((pokemon) => {
+        const firstLetter = pokemon.name.charAt(0).toUpperCase();
+
+        if (firstLetter === selectedLetter) {
+          if (letterCounts.has(firstLetter)) {
+            const count = letterCounts.get(firstLetter);
+            if (count !== undefined) {
+              letterCounts.set(firstLetter, count + 1);
+            }
+          } else {
+            letterCounts.set(firstLetter, 1);
+          }
+        }
+      });
+
+      if (letterCounts.has(selectedLetter)) {
+        const count = letterCounts.get(selectedLetter);
+        if (count !== undefined) {
+          console.log(`Cantidad de Pokémon que empiezan con ${selectedLetter}: ${count}`);
+        }
+      } else {
+        console.log(`No hay Pokémon que empiecen con la letra ${selectedLetter}`);
+      }
+    }
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -88,5 +109,6 @@ export class PokeTableComponent implements OnInit {
 
   getRow(row: any) {
     this.selectedPokemon = row;
+    this.calculateLetterCounts();
   }
 }

@@ -13,6 +13,7 @@
 .content-wrapper {
   display: flex;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 //estilos de la tabla
@@ -21,6 +22,10 @@
   margin: 0 20px;
   min-height: 100%;
   background-color: #f2f2f2;
+}
+
+.mat-mdc-row{
+  cursor: pointer;
 }
 
 .mat-header-cell {
@@ -66,4 +71,8 @@
 .mat-mdc-card-header {
   display: block !important;
   padding: 16px 16px 0;
+}
+
+.letter-count-table-container{
+  width: 100%;
 }

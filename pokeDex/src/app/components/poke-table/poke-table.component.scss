@@ -1,0 +1,65 @@
+/* CSS actual */
+@import "../../../assets/styles/variables.scss";
+
+.container {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Apilar los contenedores verticalmente */
+}
+
+.content-wrapper {
+  display: flex;
+  margin-top: 20px; /* Mover los contenedores hacia abajo */
+}
+
+.table-container {
+  width: 90%;
+  margin: 0 20px;
+  min-height: 100%;
+  background-color: #f2f2f2;
+}
+
+.card-container {
+  width: 20%;
+  margin: 0 20px;
+  background-color: #fff;
+}
+
+.mat-header-cell {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.titlecase {
+  text-transform: capitalize;
+}
+
+.mdc-data-table__header-cell {
+  text-align: center;
+}
+
+.mdc-data-table__cell {
+  text-align: center;
+}
+
+.example-card {
+  text-transform: capitalize;
+  height: 100%;
+
+  .mat-card-title, .mat-card-subtitle, .mat-card-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.mat-mdc-card-header {
+  display: block !important; /* Cambia flex a block */
+  padding: 16px 16px 0;
+}

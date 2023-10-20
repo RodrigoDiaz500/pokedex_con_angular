@@ -17,3 +17,5 @@ export const pokemonReducer = createReducer(
   on(loadPokemonsSuccess, (state, { data }) => ({ ...state, pokemons: data })),
   on(loadPokemonsFailure, (state, { error }) => ({ ...state, error })),
 );
+
+console.log("reduz",pokemonReducer);

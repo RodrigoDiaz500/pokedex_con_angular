@@ -14,16 +14,15 @@ export interface LetterCountElement {
 export class LetterCountComponent implements OnInit {
   @Input() letterCounts: LetterCountElement[] = [];
   displayedColumns: string[] = ['letter', 'count'];
-  dataSource = new MatTableDataSource<LetterCountElement>();
+  dataSource = new MatTableDataSource<LetterCountElement>(); // Modificar esta línea
 
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
     this.pokemonService.getLetterCounts().subscribe((data) => {
-      console.log('Datos de letras obtenidos:', data); // Agrega esta línea
+      console.log('Datos de letras obtenidos:', data);
       this.letterCounts = data;
       this.dataSource.data = this.letterCounts;
     });
   }
 }
-

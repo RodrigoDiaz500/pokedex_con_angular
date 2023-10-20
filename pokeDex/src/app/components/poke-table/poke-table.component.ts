@@ -44,7 +44,6 @@ export class PokeTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (this.letterCountComponent) {
-      // Verificar que letterCountComponent esté definido antes de asignar letterCounts.
       this.letterCountComponent.letterCounts = this.pokemons;
     }
   }
@@ -52,7 +51,7 @@ export class PokeTableComponent implements OnInit, AfterViewInit {
   getPokemons() {
     let pokemonData;
 
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 150; i++) {
       this.PokemonService.getPokemons(i).subscribe({
         next: (res) => {
           pokemonData = {

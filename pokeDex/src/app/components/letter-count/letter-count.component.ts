@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'; // Añade Input
+import { Component, Input, OnInit } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -12,14 +12,13 @@ export interface LetterCountElement {
   templateUrl: 'letter-count.component.html',
 })
 export class LetterCountComponent implements OnInit {
-  @Input() letterCounts: LetterCountElement[]; // Declara letterCounts como entrada
+  @Input() letterCounts: LetterCountElement[] = []; // Inicializa la propiedad con un valor predeterminado.
   displayedColumns: string[] = ['letter', 'count'];
   dataSource = new MatTableDataSource<LetterCountElement>();
 
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
-
     this.dataSource.data = this.letterCounts; // Actualiza la fuente de datos de la tabla con los datos pasados.
   }
 

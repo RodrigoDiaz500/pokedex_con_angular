@@ -1,36 +1,32 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core'; // Añade Input
+import { PokemonService } from '../../services/pokemon.service';
+import { MatTableDataSource } from '@angular/material/table';
+
+export interface LetterCountElement {
+  letter: string;
+  count: number;
+}
 
 @Component({
   selector: 'app-letter-count',
-  templateUrl: './letter-count.component.html',
-  styleUrls: ['./letter-count.component.scss']
+  templateUrl: 'letter-count.component.html',
 })
-export class LetterCountComponent implements OnChanges {
-  @Input() pokemons: any[] = [];
-  letterCounts: any[] = [];
+export class LetterCountComponent implements OnInit {
+  @Input() letterCounts: LetterCountElement[]; // Declara letterCounts como entrada
+  displayedColumns: string[] = ['letter', 'count'];
+  dataSource = new MatTableDataSource<LetterCountElement>();
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['pokemons'] && this.pokemons && this.pokemons.length > 0) {
-      this.calculateLetterCounts();
-    }
+  constructor(private pokemonService: PokemonService) {}
+
+  ngOnInit() {
+
+    this.dataSource.data = this.letterCounts; // Actualiza la fuente de datos de la tabla con los datos pasados.
   }
 
-  calculateLetterCounts() {
-    const letterMap = new Map<string, number>();
-
-    this.pokemons.forEach((pokemon) => {
-      const firstLetter = pokemon.name.charAt(0).toUpperCase();
-
-      if (letterMap.has(firstLetter)) {
-        letterMap.set(firstLetter, letterMap.get(firstLetter)! + 1);
-      } else {
-        letterMap.set(firstLetter, 1);
-      }
+  getPokemonCountsByLetter() {
+    this.pokemonService.getLetterCounts().subscribe((data) => {
+      this.letterCounts = data;
+      this.dataSource.data = this.letterCounts;
     });
-
-    this.letterCounts = Array.from(letterMap, ([letter, count]) => ({ letter, count }));
-
-    // Agregar un console.log para imprimir los valores
-    console.log('Letter Counts:', this.letterCounts);
   }
 }

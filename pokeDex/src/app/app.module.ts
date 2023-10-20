@@ -8,7 +8,7 @@ import { PokeTableComponent } from './components/poke-table/poke-table.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/shared/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { LetterCountComponent } from './letter-count/letter-count.component';
+import { LetterCountComponent } from './components/letter-count/letter-count.component';
 @NgModule({
   declarations: [
     AppComponent,

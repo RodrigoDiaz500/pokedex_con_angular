@@ -30,11 +30,12 @@ export class PokeTableComponent implements OnInit {
           image: res.sprites.front_default,
           type: res.types,
           height: res.height,
-          weight: res.weight
+          weight: res.weight,
+
         };
       },
       error: (err) => {
-        console.error('Error al obtener el primer pokémon:', err);
+        console.error('Error al obtener el primer Pokémon:', err);
       }
     });
   }
@@ -51,12 +52,12 @@ export class PokeTableComponent implements OnInit {
             image: res.sprites.front_default,
             type: res.types,
             height: res.height,
-            weight: res.weight,
+            weight: res.weight
           };
           this.pokemons.push(pokemonData);
         },
         error: (err) => {
-          console.error('Error al obtener los pokémons:', err);
+          console.error('Error al obtener los Pokémon:', err);
         },
         complete: () => {
           this.pokemons.sort((a, b) => a.position - b.position);
@@ -80,3 +81,4 @@ export class PokeTableComponent implements OnInit {
     this.selectedPokemon = row;
   }
 }
+

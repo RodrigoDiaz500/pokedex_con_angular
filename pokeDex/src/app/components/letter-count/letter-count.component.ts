@@ -12,14 +12,19 @@ export interface LetterCountElement {
   templateUrl: 'letter-count.component.html',
 })
 export class LetterCountComponent implements OnInit {
-  @Input() letterCounts: LetterCountElement[] = []; // Inicializa la propiedad con un valor predeterminado.
+  @Input() letterCounts: LetterCountElement[] = [];
   displayedColumns: string[] = ['letter', 'count'];
   dataSource = new MatTableDataSource<LetterCountElement>();
 
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
-    this.dataSource.data = this.letterCounts; // Actualiza la fuente de datos de la tabla con los datos pasados.
+    console.log('Datos de letterCounts en LetterCountComponent:', this.letterCounts);
+
+    // Actualiza la fuente de datos de la tabla con los datos pasados.
+    this.dataSource.data = this.letterCounts;
+
+    console.log('Table data:', this.dataSource.data); // Agregar esta línea para depurar
   }
 
   getPokemonCountsByLetter() {
@@ -29,3 +34,4 @@ export class LetterCountComponent implements OnInit {
     });
   }
 }
+

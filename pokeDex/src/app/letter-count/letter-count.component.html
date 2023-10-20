@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="letter-count-container">
+    <table class="letter-count-table">
+      <ng-container matColumnDef="letter">
+        <th mat-header-cell *matHeaderCellDef>Letra</th>
+        <td mat-cell *matCellDef="let count">{{ count.letter }}</td>
+      </ng-container>
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+        <td mat-cell *matCellDef="let count"></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['letter', 'count']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['letter', 'count']"></tr>
+    </table>
+  </div>
+</div>

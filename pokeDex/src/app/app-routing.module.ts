@@ -5,8 +5,6 @@ import { PokeTableComponent } from './components/poke-table/poke-table.component
 const routes: Routes = [
   {path:'home',component:PokeTableComponent},
   {path:'',pathMatch:'full',redirectTo:'home'}
-
-
 ];
 
 @NgModule({

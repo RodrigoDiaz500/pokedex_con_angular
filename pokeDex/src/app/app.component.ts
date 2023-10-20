@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pokeDex';
+  pokemons: any[] = []; // Agrega la propiedad pokemons aquí
 }

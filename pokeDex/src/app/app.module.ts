@@ -10,6 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/shared/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LetterCountComponent } from './components/letter-count/letter-count.component';
+import { StoreModule } from '@ngrx/store';
+import { pokemonReducer } from 'src/store/pokemon.reducer';
+
 
 @NgModule({
   declarations: [
@@ -17,13 +20,14 @@ import { LetterCountComponent } from './components/letter-count/letter-count.com
     FooterComponent,
     HeaderComponent,
     PokeTableComponent,
-    LetterCountComponent,
+    LetterCountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    StoreModule.forRoot({ pokemon: pokemonReducer }),
     HttpClientModule
   ],
   providers: [],

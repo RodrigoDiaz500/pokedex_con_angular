@@ -1,21 +1,24 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { LetterCountComponent, LetterCountElement } from '../letter-count/letter-count.component';
 
 @Component({
   selector: 'app-poke-table',
   templateUrl: './poke-table.component.html',
   styleUrls: ['./poke-table.component.scss']
 })
-export class PokeTableComponent implements OnInit {
+export class PokeTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'image', 'type'];
   dataSource = new MatTableDataSource<any>();
   pokemons: any[] = [];
   selectedPokemon: any | undefined;
-  letterCounts: any[] = [];
+  letterCounts: LetterCountElement[] = [];
+
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  @ViewChild(LetterCountComponent, { static: true }) letterCountComponent: LetterCountComponent | undefined;
 
   constructor(private PokemonService: PokemonService) {}
 
@@ -31,13 +34,19 @@ export class PokeTableComponent implements OnInit {
           type: res.types,
           height: res.height,
           weight: res.weight,
-
         };
       },
       error: (err) => {
         console.error('Error al obtener el primer Pokémon:', err);
       }
     });
+  }
+
+  ngAfterViewInit() {
+    if (this.letterCountComponent) {
+      // Verificar que letterCountComponent esté definido antes de asignar letterCounts.
+      this.letterCountComponent.letterCounts = this.pokemons;
+    }
   }
 
   getPokemons() {
@@ -52,7 +61,7 @@ export class PokeTableComponent implements OnInit {
             image: res.sprites.front_default,
             type: res.types,
             height: res.height,
-            weight: res.weight
+            weight: res.weight,
           };
           this.pokemons.push(pokemonData);
         },
@@ -81,4 +90,3 @@ export class PokeTableComponent implements OnInit {
     this.selectedPokemon = row;
   }
 }
-

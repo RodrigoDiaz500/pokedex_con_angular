@@ -14,13 +14,12 @@ export class PokemonService {
   constructor(private http: HttpClient) { }
 
   getPokemons(index: number) {
-
     return this.http.get<any>(`${this.baseUrl}/pokemon/${index}`);
   }
 
   getLetterCounts(): Observable<LetterCountElement[]> {
-    // Realiza una llamada HTTP para obtener los datos de letras y recuentos desde tu API.
-    return this.http.get<LetterCountElement[]>(`${this.baseUrl}/letter-counts`);
+    console.log('Solicitud para obtener datos de letras'); // Agrega esta línea
+    return this.http.get<LetterCountElement[]>(`${this.baseUrl}/pokemon`);
   }
 
 }

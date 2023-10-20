@@ -19,16 +19,8 @@ export class LetterCountComponent implements OnInit {
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
-    console.log('Datos de letterCounts en LetterCountComponent:', this.letterCounts);
-
-    // Actualiza la fuente de datos de la tabla con los datos pasados.
-    this.dataSource.data = this.letterCounts;
-
-    console.log('Table data:', this.dataSource.data); // Agregar esta línea para depurar
-  }
-
-  getPokemonCountsByLetter() {
     this.pokemonService.getLetterCounts().subscribe((data) => {
+      console.log('Datos de letras obtenidos:', data); // Agrega esta línea
       this.letterCounts = data;
       this.dataSource.data = this.letterCounts;
     });

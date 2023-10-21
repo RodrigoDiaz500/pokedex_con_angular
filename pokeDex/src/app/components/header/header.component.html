@@ -1,5 +1,19 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <img src="assets/images/pokedex.png" alt="pokedex" width="50" height="50">
+    <ng-container *ngIf="favoritePokemon">
+      <span>{{ favoritePokemon.name }}</span>
+      <span>{{ favoritePokemon.position }}</span>
+      <img [src]="favoritePokemon.image" alt="{{ favoritePokemon.name }}" width="50" height="50">
+      <br>
+      <p>Tipo(s):</p>
+      <ul>
+        <li *ngFor="let type of favoritePokemon.type">{{ type.type.name }}</li>
+      </ul>
+      <br>
+      <p>Altura: {{ favoritePokemon.height }}</p>
+      <br>
+      <p>Peso: {{ favoritePokemon.weight }}</p>
+    </ng-container>
   </mat-toolbar-row>
 </mat-toolbar>

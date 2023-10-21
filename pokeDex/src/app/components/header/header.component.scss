@@ -1,6 +1,21 @@
 @import "../../../assets/styles/variables.scss";
 
-.mat-toolbar{
+mat-toolbar {
+  color: white;
   background-color: $black;
 }
 
+/* Centra verticalmente todo el contenido dentro del encabezado */
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Alinea los elementos horizontalmente */
+}
+
+
+
+mat-toolbar img,
+mat-toolbar span,
+mat-toolbar p {
+  padding: 20px;
+}

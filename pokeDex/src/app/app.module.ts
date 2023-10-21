@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -12,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LetterCountComponent } from './components/letter-count/letter-count.component';
 import { StoreModule } from '@ngrx/store';
 import { pokemonReducer } from 'src/store/pokemon.reducer';
-
+import { FavoritesService } from './favorites.service';
+import { EventService } from 'src/app/services/event.service'; // Agrega esta línea
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { pokemonReducer } from 'src/store/pokemon.reducer';
     StoreModule.forRoot({ pokemon: pokemonReducer }),
     HttpClientModule
   ],
-  providers: [],
+  providers: [FavoritesService, EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

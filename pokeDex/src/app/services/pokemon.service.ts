@@ -1,21 +1,40 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { LetterCountElement } from '../components/letter-count/letter-count.component';
 import { Observable, of } from 'rxjs';
 import { catchError, map, concatMap } from 'rxjs/operators';
+import { FavoritesService } from '../favorites.service';
+import { LetterCountElement } from '../components/letter-count/letter-count.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PokemonService {
-
   baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private favoritesService: FavoritesService) {}
 
-  getPokemons(index: number) {
+  getPokemons(index: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/pokemon/${index}`);
+  }
+
+  getSpecies(index: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/pokemon-species/${index}`);
+  }
+
+  getDescription(pokemonIndex: number, languageCode: string): Observable<string> {
+    return this.getSpecies(pokemonIndex).pipe(
+      map((species: any) => {
+        const descriptionEntry = species.flavor_text_entries.find(
+          (entry: any) => entry.language.name === languageCode
+        );
+        return descriptionEntry ? descriptionEntry.flavor_text : 'No description available';
+      }),
+      catchError((error) => {
+        console.error('Error fetching Pokémon description:', error);
+        return 'No description available';
+      })
+    );
   }
 
   getAllPokemons(): Observable<any[]> {
@@ -45,7 +64,6 @@ export class PokemonService {
         pokemons.forEach((pokemon: any) => {
           const firstLetter = pokemon.name.charAt(0).toUpperCase();
           letterCountsMap[firstLetter] = (letterCountsMap[firstLetter] || 0) + 1;
-          console.log(pokemon);
         });
 
         const letterCounts: LetterCountElement[] = Object.keys(letterCountsMap).map((letter) => ({
@@ -53,7 +71,6 @@ export class PokemonService {
           count: letterCountsMap[letter],
         }));
 
-        // Ordenar los resultados en orden alfabético
         letterCounts.sort((a, b) => a.letter.localeCompare(b.letter));
 
         return letterCounts;
@@ -64,6 +81,14 @@ export class PokemonService {
       })
     );
   }
+
+  // Agrega un Pokémon a la lista de favoritos
+  addToFavorites(pokemon: any) {
+    this.favoritesService.toggleFavorite(pokemon);
+  }
+
+  // Verifica si un Pokémon es un favorito
+  isFavorite(pokemon: any): boolean {
+    return this.favoritesService.isFavorite(pokemon);
+  }
 }
-
-

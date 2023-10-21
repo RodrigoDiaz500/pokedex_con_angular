@@ -22,8 +22,6 @@ export class LetterCountComponent implements OnInit {
     this.pokemonService.getLetterCounts().subscribe((data) => {
       this.letterCounts = data;
       this.dataSource.data = this.letterCounts;
-      console.log('Contenido de letterCounts:', this.letterCounts);
     });
   }
 }
-

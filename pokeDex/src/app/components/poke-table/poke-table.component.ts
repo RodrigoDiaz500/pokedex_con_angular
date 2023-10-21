@@ -57,7 +57,7 @@ export class PokeTableComponent implements OnInit, AfterViewInit {
   }
 
   getPokemons() {
-    for (let i = 1; i <= 150; i++) {
+    for (let i = 1; i <= 1008; i++) {
       this.loadPokemonData(i);
     }
   }

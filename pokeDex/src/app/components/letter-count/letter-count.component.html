@@ -1,9 +1,9 @@
 <!-- tabla que cuenta la cantidad de Pokémon que inician con cada letra del abecedario. -->
 <div class="container">
-  <div class="letter-count second-table">
-    <table mat-table [dataSource]="letterCounts" class="mat-elevation-z8 my-custom-table" id="table">
+  <div class="letter-count second-table" >
+    <table mat-table [dataSource]="letterCounts" class="mat-elevation-z8 my-custom-table" >
       <ng-container matColumnDef="letter">
-        <th mat-header-cell *matHeaderCellDef> Letra </th>
+        <th mat-header-cell class="header-cell-2" *matHeaderCellDef > Letra </th>
         <td mat-cell *matCellDef="let element"> {{element.letter}} </td>
       </ng-container>
       <ng-container matColumnDef="count">

@@ -10,6 +10,7 @@ export interface LetterCountElement {
 @Component({
   selector: 'app-letter-count',
   templateUrl: 'letter-count.component.html',
+  styleUrls: ['./letter-count.component.scss']
 })
 export class LetterCountComponent implements OnInit {
   @Input() letterCounts: LetterCountElement[] = [];

@@ -5,17 +5,22 @@ mat-toolbar {
   background-color: $black;
 }
 
-/* Centra verticalmente todo el contenido dentro del encabezado */
 mat-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Alinea los elementos horizontalmente */
+  justify-content: space-between;
 }
-
-
 
 mat-toolbar img,
 mat-toolbar span,
 mat-toolbar p {
   padding: 20px;
+  text-align: center;
+  margin: 0 !important;
 }
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  width: auto;
+}
+
+

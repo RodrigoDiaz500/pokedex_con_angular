@@ -17,26 +17,14 @@ export class PokeTableComponent implements OnInit, AfterViewInit {
   selectedPokemon: any | undefined;
   letterCounts: LetterCountElement[] = [];
 
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
   @ViewChild(LetterCountComponent, { static: true }) letterCountComponent: LetterCountComponent | undefined;
 
   constructor(private PokemonService: PokemonService) {}
 
   ngOnInit(): void {
-    forkJoin(this.getPokemonObservables()).subscribe({
-      next: (results) => {
-        this.pokemons = results;
-        this.dataSource = new MatTableDataSource<any>(this.pokemons);
-        this.dataSource.paginator = this.paginator ?? null;
-
-        if (this.letterCountComponent) {
-          this.letterCountComponent.letterCounts = this.pokemons;
-        }
-      },
-      error: (err) => {
-        console.error('Error al obtener los Pokémon:', err);
-      }
-    });
+    this.getPokemons();
 
     this.PokemonService.getPokemons(1).subscribe({
       next: (res) => {
@@ -53,14 +41,6 @@ export class PokeTableComponent implements OnInit, AfterViewInit {
         console.error('Error al obtener el primer Pokémon:', err);
       }
     });
-  }
-
-  private getPokemonObservables() {
-    const observables = [];
-    for (let i = 1; i <= 150; i++) {
-      observables.push(this.PokemonService.getPokemons(i));
-    }
-    return observables;
   }
 
   ngAfterViewInit() {

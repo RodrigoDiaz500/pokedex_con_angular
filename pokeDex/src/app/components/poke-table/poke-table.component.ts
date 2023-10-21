@@ -3,7 +3,6 @@ import { PokemonService } from '../../services/pokemon.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { LetterCountComponent, LetterCountElement } from '../letter-count/letter-count.component';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-poke-table',
@@ -52,7 +51,7 @@ export class PokeTableComponent implements OnInit, AfterViewInit {
   getPokemons() {
     let pokemonData;
 
-    for (let i = 1; i <= 150; i++) {
+    for (let i = 1; i <= 1008; i++) {
       this.PokemonService.getPokemons(i).subscribe({
         next: (res) => {
           pokemonData = {
